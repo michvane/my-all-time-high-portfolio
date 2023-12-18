@@ -110,10 +110,11 @@ const Calculator: React.FC = () => {
         </Button>
 
         {calculatedValue ? (
-          <div>
+          <div className="flex flex-col items-center">
             <Heading as="h2" size="7" className="!mt-4">
               ${calculatedValue}
             </Heading>
+            <Text>Looking good 😎</Text>
           </div>
         ) : null}
       </div>

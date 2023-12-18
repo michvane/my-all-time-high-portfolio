@@ -26,8 +26,8 @@ export default function Home() {
         </div>
         <div className="text-center mb-12 max-w-[440px]">
           <Text size="4">
-            Calculate how much your portfolio would be worth if every coin would
-            reach their all time high!
+            Calculate how much your portfolio would be worth if every coin you
+            hold would reach their all time high!
           </Text>
         </div>
         <Calculator />
