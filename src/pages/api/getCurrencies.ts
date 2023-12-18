@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { promises as fs } from "fs";
+import { crypto } from "../../../data/crypto";
 
 type ResponseData = {
   message: string;
@@ -7,15 +8,13 @@ type ResponseData = {
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<ResponseData>
+  res: NextApiResponse<any>
 ) {
-  const dataPath = "data/crypto.json"; // Path to your JSON file
-  async function getJSONData() {
-    const fileContent = await fs.readFile(dataPath, "utf8");
-    const parsedData = JSON.parse(fileContent);
-    return parsedData;
-  }
+  // async function getJSONData() {
+  //   const parsedData = JSON.stringify(crypto);
+  //   return parsedData;
+  // }
 
-  const data = await getJSONData();
-  res.status(200).json(data);
+  // const data = await getJSONData();
+  res.status(200).json(crypto);
 }

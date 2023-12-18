@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { SelectedCrypto } from ".";
 import Input from "../input";
 import Selector, { Option } from "../selector";
-import { Heading, Text } from "@radix-ui/themes";
 
 interface Props {
   jsonData: any;
@@ -17,6 +16,10 @@ const CryptoSelector: React.FC<Props> = ({
   onSelectedCurrency,
   index,
 }) => {
+  const handleCryptoSelection = (value: string) => {
+    onSelectedCurrency(value, selectedCrypto.amount, index);
+  };
+
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     onSelectedCurrency(selectedCrypto.currency, event.target.value, index);
   };
@@ -29,7 +32,11 @@ const CryptoSelector: React.FC<Props> = ({
   return (
     <div className="flex">
       <div className="mr-4 flex flex-col w-40">
-        <Selector id="crypto-selector" options={options} />
+        <Selector
+          id="crypto-selector"
+          options={options}
+          handleCryptoSelection={handleCryptoSelection}
+        />
       </div>
       <div className="flex flex-col">
         <Input

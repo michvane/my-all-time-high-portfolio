@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import CurrencySelector from "./CurrencySelector";
 import { Button, Heading, Text } from "@radix-ui/themes";
-import { BookmarkFilledIcon, BookmarkIcon } from "@radix-ui/react-icons";
+import { PlusIcon } from "@radix-ui/react-icons";
 
 const DEFAULT_INPUT = { currency: "0", amount: "0" };
 
@@ -83,7 +83,7 @@ const Calculator: React.FC = () => {
           </label>
           <label htmlFor="entered-value" className="w-40 text-center">
             <Text as="div" weight="bold">
-              Enter Value
+              Enter your holdings
             </Text>
           </label>
         </div>
@@ -98,19 +98,23 @@ const Calculator: React.FC = () => {
         ))}
       </div>
       <div className="flex mb-8">
-        <Button onClick={handleAddRow}>+</Button>
+        <Button onClick={handleAddRow}>
+          <PlusIcon height={16} width={16} />
+        </Button>
       </div>
       <div className="flex justify-center items-center flex-col">
         <Button size="2" onClick={calculateValueAtATH}>
           <Text weight="bold" size="4">
-            Calculate Value at ATH
+            Calculate
           </Text>
         </Button>
 
         {calculatedValue ? (
-          <Heading as="h2" size="7" className="!mt-4">
-            Value at ATH: {calculatedValue}
-          </Heading>
+          <div>
+            <Heading as="h2" size="7" className="!mt-4">
+              ${calculatedValue}
+            </Heading>
+          </div>
         ) : null}
       </div>
     </div>

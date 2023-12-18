@@ -1,5 +1,5 @@
 import { Select } from "@radix-ui/themes";
-import React from "react";
+import React, { FormEvent } from "react";
 
 export interface Option {
   value: string;
@@ -7,17 +7,17 @@ export interface Option {
   disabled?: boolean;
 }
 
-const Selector: React.FC<{ options: Option[]; id: string }> = ({
-  options,
-  id,
-}) => {
+const Selector: React.FC<{
+  options: Option[];
+  id: string;
+  handleCryptoSelection: (value: string) => void;
+}> = ({ options, id, handleCryptoSelection }) => {
   return (
-    <Select.Root defaultValue="0">
+    <Select.Root defaultValue="0" onValueChange={handleCryptoSelection}>
       <Select.Trigger id={id} />
       <Select.Content>
         {options.map((option) => (
           <Select.Group key={option.value}>
-            {/* <Select.Label>{option.label}</Select.Label> */}
             <Select.Item
               key={option.value}
               value={option.value}
