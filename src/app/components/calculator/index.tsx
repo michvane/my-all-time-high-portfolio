@@ -33,6 +33,8 @@ const Calculator: React.FC = () => {
   }, []);
 
   const handleAddRow = () => {
+    setCalculatedValue(0);
+
     const currentSelectedCryptos = selectedCryptos.slice();
     currentSelectedCryptos.push({ currency: "0", amount: "0" });
     setSelectedCryptos(currentSelectedCryptos);
@@ -43,6 +45,8 @@ const Calculator: React.FC = () => {
     amount: string,
     index: number
   ) => {
+    setCalculatedValue(0);
+
     const currentSelectedCryptos = selectedCryptos.slice();
 
     if (!currentSelectedCryptos[index]) {
