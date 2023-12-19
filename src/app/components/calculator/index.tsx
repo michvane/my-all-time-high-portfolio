@@ -64,7 +64,8 @@ const Calculator: React.FC = () => {
       // @ts-ignore
       const crypto = jsonData[selectedCrypto.currency];
       const athPrice = parseFloat(crypto.ath);
-      const calculatedValueInATH = parseFloat(selectedCrypto.amount || '') * athPrice;
+      const calculatedValueInATH =
+        parseFloat(selectedCrypto.amount || "") * athPrice;
 
       return calculatedValueInATH;
     });
@@ -116,7 +117,7 @@ const Calculator: React.FC = () => {
         {calculatedValue ? (
           <div className="flex flex-col items-center">
             <Heading as="h2" size="7" className="!mt-4">
-              ${calculatedValue}
+              ${Number(calculatedValue.toFixed(2)).toLocaleString("en-US")}
             </Heading>
             <Text>Looking good 😎</Text>
           </div>

@@ -23,12 +23,12 @@ export default function RootLayout({
       <body className={inter.className}>
         <Theme
           appearance="dark"
-          accentColor="plum"
-          grayColor="mauve"
+          accentColor="ruby"
+          grayColor="sand"
           radius="large"
         >
           {children}
-          {/* <ThemePanel /> */}
+          <ThemePanel />
         </Theme>
       </body>
     </html>
