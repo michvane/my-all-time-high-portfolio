@@ -13,7 +13,7 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-4">
       <Landing className="flex justify-center">
-        <div className="max-w-4xl w-full items-center justify-center font-mono text-sm flex flex-col">
+        <div className="max-w-4xl w-full items-center mt-20 sm:mt:0 sm:justify-center font-mono text-sm flex flex-col">
           <div
             className="p-4 rounded-2xl max-w-[600px]"
             style={{
@@ -45,8 +45,7 @@ export default function Home() {
           </Button>
         </div>
       </Landing>
-      {/* <Web3 /> */}
-      <Landing className="flex">
+      <Landing className="flex h-[100svh]">
         <div
           ref={ref}
           className="h-fit flex flex-col max-w-[400px] mt-12 sm:mt-20 justify-center"
