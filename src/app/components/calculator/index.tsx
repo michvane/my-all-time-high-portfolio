@@ -3,11 +3,11 @@ import CurrencySelector from "./CurrencySelector";
 import { Button, Heading, Text } from "@radix-ui/themes";
 import { PlusIcon } from "@radix-ui/react-icons";
 
-const DEFAULT_INPUT = { currency: "0", amount: "0" };
+const DEFAULT_INPUT = { currency: "0", amount: undefined };
 
 export type SelectedCrypto = {
   currency: string;
-  amount: string;
+  amount: string | undefined;
 };
 
 const Calculator: React.FC = () => {
@@ -36,13 +36,13 @@ const Calculator: React.FC = () => {
     setCalculatedValue(0);
 
     const currentSelectedCryptos = selectedCryptos.slice();
-    currentSelectedCryptos.push({ currency: "0", amount: "0" });
+    currentSelectedCryptos.push({ currency: "0", amount: undefined });
     setSelectedCryptos(currentSelectedCryptos);
   };
 
   const handleSelectedCurrency = (
     currency: string,
-    amount: string,
+    amount: string | undefined,
     index: number
   ) => {
     setCalculatedValue(0);
@@ -64,7 +64,7 @@ const Calculator: React.FC = () => {
       // @ts-ignore
       const crypto = jsonData[selectedCrypto.currency];
       const athPrice = parseFloat(crypto.ath);
-      const calculatedValueInATH = parseFloat(selectedCrypto.amount) * athPrice;
+      const calculatedValueInATH = parseFloat(selectedCrypto.amount || '') * athPrice;
 
       return calculatedValueInATH;
     });
@@ -79,7 +79,7 @@ const Calculator: React.FC = () => {
   return (
     <div>
       <div className="flex justify-center items-center flex-col gap-2 mb-4">
-        <div className="flex w-[300px] justify-center flex-row gap-4">
+        <div className="flex w-full sm:w-[300px] justify-center flex-row gap-4">
           <label htmlFor="crypto-selector" className="w-2/5 text-left">
             <Text as="div" weight="bold" size={{ initial: "2", sm: "3" }}>
               Your holdings

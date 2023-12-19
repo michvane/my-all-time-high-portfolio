@@ -9,7 +9,11 @@ import clsx from "clsx";
 interface Props {
   jsonData: any;
   selectedCrypto: SelectedCrypto;
-  onSelectedCurrency: (currency: string, amount: string, index: number) => void;
+  onSelectedCurrency: (
+    currency: string,
+    amount: string | undefined,
+    index: number
+  ) => void;
   index: number;
 }
 
@@ -24,7 +28,18 @@ const CryptoSelector: React.FC<Props> = ({
   };
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    onSelectedCurrency(selectedCrypto.currency, event.target.value, index);
+    let newValue = event.target.value;
+    if (Number(newValue) < 10 && newValue.indexOf(".") === 2) {
+      newValue = newValue.slice(1);
+    } else if (
+      newValue.length > 1 &&
+      newValue.startsWith("0") &&
+      newValue.indexOf(".") === -1
+    ) {
+      newValue = newValue.slice(1);
+    }
+
+    onSelectedCurrency(selectedCrypto.currency, String(newValue), index);
   };
 
   const options: Option[] = Object.keys(jsonData).map((key) => {
@@ -33,11 +48,14 @@ const CryptoSelector: React.FC<Props> = ({
   });
 
   return (
-    <div className="flex justify-center">
-      <div className="flex max-w-[300px]">
+    <div className="flex w-full justify-center">
+      <div className="flex w-full sm:max-w-[300px]">
         <input
           type="number"
-          value={selectedCrypto.amount}
+          placeholder="0.0"
+          value={
+            selectedCrypto.amount === undefined ? "" : selectedCrypto.amount
+          }
           onChange={handleInputChange}
           className={clsx("w-2/5", styles.input)}
         />

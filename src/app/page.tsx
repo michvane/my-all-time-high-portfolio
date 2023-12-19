@@ -1,10 +1,8 @@
 "use client";
 import { Button, Heading, Text } from "@radix-ui/themes";
 import Calculator from "./components/calculator";
-import Web3 from "./components/web3";
-import ComboInput from "./components/input/ComboInput";
 import Landing from "./components/screens/Landing";
-import { LegacyRef, MutableRefObject, useRef } from "react";
+import { useRef } from "react";
 
 export default function Home() {
   const ref = useRef<HTMLDivElement | null>(null);
