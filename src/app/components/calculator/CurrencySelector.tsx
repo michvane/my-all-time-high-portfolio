@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { SelectedCrypto } from ".";
 import Input from "../input";
 import Selector, { Option } from "../selector";
+import ComboSelect from "./ComboSelect";
+import styles from "./style.module.css";
+import clsx from "clsx";
 
 interface Props {
   jsonData: any;
@@ -30,20 +33,19 @@ const CryptoSelector: React.FC<Props> = ({
   });
 
   return (
-    <div className="flex">
-      <div className="mr-4 flex flex-col w-40">
-        <Selector
-          id="crypto-selector"
-          options={options}
-          handleCryptoSelection={handleCryptoSelection}
-        />
-      </div>
-      <div className="flex flex-col">
-        <Input
+    <div className="flex justify-center">
+      <div className="flex max-w-[300px]">
+        <input
           type="number"
-          id="entered-value"
           value={selectedCrypto.amount}
           onChange={handleInputChange}
+          className={clsx("w-2/5", styles.input)}
+        />
+        <ComboSelect
+          options={options}
+          value={selectedCrypto.currency}
+          jsonData={jsonData}
+          onChange={handleCryptoSelection}
         />
       </div>
     </div>

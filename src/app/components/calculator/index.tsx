@@ -78,16 +78,16 @@ const Calculator: React.FC = () => {
 
   return (
     <div>
-      <div className="flex flex-col gap-2 mb-4">
-        <div className="flex flex-row gap-4">
-          <label htmlFor="crypto-selector" className="w-40 text-center">
-            <Text as="div" weight="bold">
-              Select Crypto
+      <div className="flex justify-center items-center flex-col gap-2 mb-4">
+        <div className="flex w-[300px] justify-center flex-row gap-4">
+          <label htmlFor="crypto-selector" className="w-2/5 text-left">
+            <Text as="div" weight="bold" size={{ initial: "2", sm: "3" }}>
+              Your holdings
             </Text>
           </label>
-          <label htmlFor="entered-value" className="w-40 text-center">
-            <Text as="div" weight="bold">
-              Enter your holdings
+          <label htmlFor="entered-value" className="w-3/5 text-left">
+            <Text as="div" weight="bold" size={{ initial: "2", sm: "3" }}>
+              Select Crypto
             </Text>
           </label>
         </div>
@@ -102,12 +102,12 @@ const Calculator: React.FC = () => {
         ))}
       </div>
       <div className="flex mb-8">
-        <Button onClick={handleAddRow}>
+        <Button onClick={handleAddRow} className="bg-[#bf3e5d]">
           <PlusIcon height={16} width={16} />
         </Button>
       </div>
       <div className="flex justify-center items-center flex-col">
-        <Button size="2" onClick={calculateValueAtATH}>
+        <Button size="2" onClick={calculateValueAtATH} className="bg-[#bf3e5d]">
           <Text weight="bold" size="4">
             Calculate
           </Text>
