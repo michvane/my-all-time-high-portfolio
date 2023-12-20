@@ -5,9 +5,10 @@ import Selector, { Option } from "../selector";
 import ComboSelect from "./ComboSelect";
 import styles from "./style.module.css";
 import clsx from "clsx";
+import { CryptoInfo } from "@/types";
 
 interface Props {
-  jsonData: any;
+  cryptoList: CryptoInfo[];
   selectedCrypto: SelectedCrypto;
   onSelectedCurrency: (
     currency: string,
@@ -18,7 +19,7 @@ interface Props {
 }
 
 const CryptoSelector: React.FC<Props> = ({
-  jsonData,
+  cryptoList,
   selectedCrypto,
   onSelectedCurrency,
   index,
@@ -42,8 +43,8 @@ const CryptoSelector: React.FC<Props> = ({
     onSelectedCurrency(selectedCrypto.currency, String(newValue), index);
   };
 
-  const options: Option[] = Object.keys(jsonData).map((key) => {
-    const crypto = jsonData[key];
+  const options: Option[] = Object.keys(cryptoList).map((key) => {
+    const crypto = cryptoList[Number(key)];
     return { value: key, label: crypto.name };
   });
 
@@ -62,7 +63,7 @@ const CryptoSelector: React.FC<Props> = ({
         <ComboSelect
           options={options}
           value={selectedCrypto.currency}
-          jsonData={jsonData}
+          cryptoList={cryptoList}
           onChange={handleCryptoSelection}
         />
       </div>

@@ -2,6 +2,7 @@ import { ForwardedRef, forwardRef, useEffect, useState } from "react";
 import CurrencySelector from "./CurrencySelector";
 import { Button, Heading, Text } from "@radix-ui/themes";
 import { PlusIcon } from "@radix-ui/react-icons";
+import { CryptoInfo } from "@/types";
 
 const DEFAULT_INPUT = { currency: "0", amount: undefined };
 
@@ -16,19 +17,15 @@ const CalculatorInput: React.FC = () => {
   ]);
   const [calculatedValue, setCalculatedValue] = useState<number>(0);
 
-  const [jsonData, setJsonData] = useState({});
+  const [cryptoList, setCryptoList] = useState<CryptoInfo[]>([]);
 
   useEffect(() => {
     const getData = async () => {
-      const response = await fetch("/api/currencies", {
+      await fetch("/api/currencies", {
         next: { revalidate: 600 },
-      });
-
-      if (response.ok) {
-        const {data} = await response.json();
-
-        setJsonData(data);
-      }
+      })
+        .then((response) => response.json())
+        .then(({ data }: { data: CryptoInfo[] }) => setCryptoList(data));
     };
 
     getData();
@@ -64,7 +61,7 @@ const CalculatorInput: React.FC = () => {
   const calculateValueAtATH = () => {
     const AthArray = selectedCryptos.map((selectedCrypto) => {
       // @ts-ignore
-      const crypto = jsonData[selectedCrypto.currency];
+      const crypto = cryptoList[selectedCrypto.currency];
       const athPrice = parseFloat(crypto.ath);
       console.log(selectedCrypto);
       const calculatedValueInATH =
@@ -98,7 +95,7 @@ const CalculatorInput: React.FC = () => {
         {selectedCryptos.map((selectedCrypto, index) => (
           <CurrencySelector
             key={index}
-            jsonData={jsonData}
+            cryptoList={cryptoList}
             selectedCrypto={selectedCrypto}
             onSelectedCurrency={handleSelectedCurrency}
             index={index}

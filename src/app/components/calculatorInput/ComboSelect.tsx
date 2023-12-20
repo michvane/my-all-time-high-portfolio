@@ -4,6 +4,7 @@ import clsx from "clsx";
 import { ChevronDownIcon } from "@radix-ui/react-icons";
 import { Text } from "@radix-ui/themes";
 import Image from "next/image";
+import { CryptoInfo } from "@/types";
 
 type Option = {
   label: string;
@@ -12,19 +13,21 @@ type Option = {
 
 type ComboSelectProps = {
   options: Option[];
-  jsonData: any;
+  cryptoList: CryptoInfo[];
   onChange: (value: string) => void;
   value?: string;
 };
 
 const ComboSelect: React.FC<ComboSelectProps> = ({
-  jsonData,
+  // TODO: Pass selected crypto
+  cryptoList,
   options,
   onChange,
   value,
 }) => {
-  const name = value ? jsonData[value]?.name : "";
-  const imgSrc = value ? jsonData[value]?.image : "";
+  console.log(cryptoList);
+  const name = value ? cryptoList[Number(value)]?.name : "";
+  const imgSrc = value ? cryptoList[Number(value)]?.image : "";
   return (
     <Select.Root defaultValue="0" value={value} onValueChange={onChange}>
       <Select.Trigger
