@@ -104,7 +104,7 @@ const CalculatorInput: React.FC = () => {
         ))}
       </div>
 
-      <div className="flex justify-center items-center flex-col">
+      <div className="flex justify-center items-center flex-col mb-10">
         <div className="w-full sm:w-[340px] flex justify-between">
           <Button onClick={handleAddRow}>
             <PlusIcon height={16} width={16} />
