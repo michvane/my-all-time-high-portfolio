@@ -1,10 +1,11 @@
 import * as Select from "@radix-ui/react-select";
 import styles from "./style.module.css";
 import clsx from "clsx";
-import { ChevronDownIcon } from "@radix-ui/react-icons";
-import { Text } from "@radix-ui/themes";
+import { ChevronDownIcon, MagnifyingGlassIcon } from "@radix-ui/react-icons";
 import Image from "next/image";
 import { CryptoInfo } from "@/types";
+import Input from "../input";
+import { useRef, useState } from "react";
 
 type Option = {
   label: string;
@@ -25,12 +26,22 @@ const ComboSelect: React.FC<ComboSelectProps> = ({
   onChange,
   value,
 }) => {
+  const [filteredOptions, setFilteredOptions] = useState<Option[]>(options);
+
   const name = value ? cryptoList[Number(value)]?.name : "";
   const imgSrc = value ? cryptoList[Number(value)]?.image : "";
+
+  const handleSearch = (value: string) => {
+    const filteredOptions = options.filter((option) =>
+      option.label.toLowerCase().includes(value.toLowerCase())
+    );
+    setFilteredOptions(filteredOptions);
+  };
 
   return (
     <Select.Root defaultValue="0" value={value} onValueChange={onChange}>
       <Select.Trigger
+        onClick={() => console.log("clicked")}
         className={clsx(
           "w-3/5 rounded-none border-none shadow-none cursor-pointer flex flex-row justify-between items-center truncate",
           styles.select
@@ -59,13 +70,18 @@ const ComboSelect: React.FC<ComboSelectProps> = ({
       >
         <Select.Viewport className="max-h-80">
           <Select.Group>
-            <Text as="p" className="p-2">
-              Search coming soon!
-            </Text>
+            <div className="p-2">
+              <Input
+                search
+                placeholder="Search"
+                type={"text"}
+                onChange={(e) => handleSearch(e.target.value)}
+              />
+            </div>
           </Select.Group>
           <Select.Separator className="h-[1px] m-1 bg-[#edcfcf1f]" />
           <Select.Group>
-            {options.map((option) => (
+            {filteredOptions.map((option) => (
               <Select.Item
                 key={option.value}
                 value={option.value}
