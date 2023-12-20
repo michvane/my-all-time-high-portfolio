@@ -63,7 +63,6 @@ const CalculatorInput: React.FC = () => {
       // @ts-ignore
       const crypto = cryptoList[selectedCrypto.currency];
       const athPrice = parseFloat(crypto.ath);
-      console.log(selectedCrypto);
       const calculatedValueInATH =
         parseFloat(selectedCrypto?.amount || "0") * athPrice;
 

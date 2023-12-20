@@ -25,9 +25,9 @@ const ComboSelect: React.FC<ComboSelectProps> = ({
   onChange,
   value,
 }) => {
-  console.log(cryptoList);
   const name = value ? cryptoList[Number(value)]?.name : "";
   const imgSrc = value ? cryptoList[Number(value)]?.image : "";
+
   return (
     <Select.Root defaultValue="0" value={value} onValueChange={onChange}>
       <Select.Trigger
