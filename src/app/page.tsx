@@ -1,82 +1,32 @@
 "use client";
-import { Button, Heading, Text } from "@radix-ui/themes";
-import Calculator from "./components/calculator";
 import Landing from "./components/screens/Landing";
-import { useRef } from "react";
+import { useRef, useState } from "react";
+import Calculator from "./components/screens/Calculator";
+import clsx from "clsx";
 
 export default function Home() {
-  const ref = useRef<HTMLDivElement | null>(null);
+  const [screen, setScreen] = useState<"landing" | "calculator">("landing");
+  // const ref = useRef<HTMLDivElement | null>(null);
 
   const onScroll = () => {
-    ref.current?.scrollIntoView({ behavior: "smooth" });
+    setScreen("calculator");
+    // ref.current?.scrollIntoView({ behavior: "smooth" });
   };
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-4">
-      <Landing className="flex justify-center">
-        <div className="max-w-4xl w-full items-center mt-20 sm:mt:0 sm:justify-center font-mono text-sm flex flex-col">
-          <div
-            className="p-4 rounded-2xl max-w-[600px]"
-            style={{
-              background: "linear-gradient(90deg,#fdf1cb,#b01041)",
-              WebkitBackgroundClip: "text",
-              backgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-            }}
-          >
-            <Heading
-              as="h1"
-              align="center"
-              size="8"
-              className="uppercase font-extrabold"
-            >
-              <em>Your All Time High Portfolio Calculator</em>
-            </Heading>
-          </div>
-          <div className="text-center mb-12 max-w-[440px]">
-            <Text size="4">
-              Calculate how much your portfolio would be worth if every coin you
-              hold would reach their all time high!
-            </Text>
-          </div>
-          <Button onClick={onScroll} size="4" className="bg-[#bf3e5d]">
-            <Text weight="bold" size="6">
-              Calculate now
-            </Text>
-          </Button>
-        </div>
-      </Landing>
-      <Landing className="flex h-[100svh]">
-        <div
-          ref={ref}
-          className="h-fit flex flex-col max-w-[400px] mt-12 sm:mt-20 justify-center"
-        >
-          <div
-            className="sm:p-4 rounded-2xl max-w-[600px]"
-            style={{
-              background: "linear-gradient(90deg,#fdf1cb,#b01041)",
-              WebkitBackgroundClip: "text",
-              backgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-            }}
-          >
-            <Heading
-              as="h2"
-              align="center"
-              size={{ initial: "7", sm: "8" }}
-              className="uppercase font-extrabold"
-            >
-              <em>What coins do you hodl?</em>
-            </Heading>
-          </div>
-          <div className="text-center mb-6 sm:mb-12 max-w-[440px]">
-            <Text size={{ initial: "2", sm: "3" }}>
-              Enter the amount you currently hold of each coin to calculate your
-              all time high portfolio value.
-            </Text>
-          </div>
-          <Calculator />
-        </div>
-      </Landing>
+    <main className="relative flex max-h-screen min-h-screen min-w-[100vw] max-w-[100vw] overflow-x-hidden flex-row">
+      <Landing
+        onScroll={onScroll}
+        className={clsx(
+          "flex absolute left-1/2 transform -translate-x-1/2 sm:translate-y-1/3 sm:mt-[60px] transition duration-300 ease-in-out delay-150 w-full justify-center px-6",
+          screen === "calculator" ? "-translate-x-[200%]" : ""
+        )}
+      />
+      <Calculator
+        className={clsx(
+          "absolute left-1/2 transform translate-x-[200%] duration-300 ease-in-out delay-150 w-full flex justify-center px-6",
+          screen === "calculator" ? "!-translate-x-1/2" : ""
+        )}
+      />
     </main>
   );
 }

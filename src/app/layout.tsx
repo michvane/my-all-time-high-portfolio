@@ -28,7 +28,7 @@ export default function RootLayout({
           radius="large"
         >
           {children}
-          <ThemePanel />
+          {/* <ThemePanel /> */}
         </Theme>
       </body>
     </html>

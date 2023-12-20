@@ -5,3 +5,7 @@
 .radix-themes {
   --default-font-family: var(--font-nunito) !important;
 }
+
+button { 
+  cursor: pointer !important;
+}

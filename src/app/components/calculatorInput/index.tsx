@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { ForwardedRef, forwardRef, useEffect, useState } from "react";
 import CurrencySelector from "./CurrencySelector";
 import { Button, Heading, Text } from "@radix-ui/themes";
 import { PlusIcon } from "@radix-ui/react-icons";
@@ -10,7 +10,7 @@ export type SelectedCrypto = {
   amount: string | undefined;
 };
 
-const Calculator: React.FC = () => {
+const CalculatorInput: React.FC = () => {
   const [selectedCryptos, setSelectedCryptos] = useState<SelectedCrypto[]>([
     DEFAULT_INPUT,
   ]);
@@ -64,8 +64,9 @@ const Calculator: React.FC = () => {
       // @ts-ignore
       const crypto = jsonData[selectedCrypto.currency];
       const athPrice = parseFloat(crypto.ath);
+      console.log(selectedCrypto);
       const calculatedValueInATH =
-        parseFloat(selectedCrypto.amount || "") * athPrice;
+        parseFloat(selectedCrypto?.amount || "0") * athPrice;
 
       return calculatedValueInATH;
     });
@@ -80,7 +81,7 @@ const Calculator: React.FC = () => {
   return (
     <div>
       <div className="flex justify-center items-center flex-col gap-2 mb-4">
-        <div className="flex w-full sm:w-[300px] justify-center flex-row gap-4">
+        <div className="flex w-full sm:w-[340px] justify-center flex-row gap-4">
           <label htmlFor="crypto-selector" className="w-2/5 text-left">
             <Text as="div" weight="bold" size={{ initial: "2", sm: "3" }}>
               Your holdings
@@ -102,22 +103,24 @@ const Calculator: React.FC = () => {
           />
         ))}
       </div>
-      <div className="flex mb-8">
-        <Button onClick={handleAddRow} className="bg-[#bf3e5d]">
-          <PlusIcon height={16} width={16} />
-        </Button>
-      </div>
+
       <div className="flex justify-center items-center flex-col">
-        <Button size="2" onClick={calculateValueAtATH} className="bg-[#bf3e5d]">
-          <Text weight="bold" size="4">
-            Calculate
-          </Text>
-        </Button>
+        <div className="w-full sm:w-[340px] flex justify-between">
+          <Button onClick={handleAddRow}>
+            <PlusIcon height={16} width={16} />
+          </Button>
+
+          <Button size="2" onClick={calculateValueAtATH}>
+            <Text weight="bold" size="4">
+              Calculate
+            </Text>
+          </Button>
+        </div>
 
         {calculatedValue ? (
           <div className="flex flex-col items-center">
             <Heading as="h2" size="7" className="!mt-4">
-              ${Number(calculatedValue.toFixed(2)).toLocaleString("en-US")}
+              ${Number(calculatedValue.toFixed(4)).toLocaleString("en-US")}
             </Heading>
             <Text>Looking good 😎</Text>
           </div>
@@ -127,4 +130,4 @@ const Calculator: React.FC = () => {
   );
 };
 
-export default Calculator;
+export default CalculatorInput;

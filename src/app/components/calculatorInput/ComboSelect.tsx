@@ -3,6 +3,7 @@ import styles from "./style.module.css";
 import clsx from "clsx";
 import { ChevronDownIcon } from "@radix-ui/react-icons";
 import { Text } from "@radix-ui/themes";
+import Image from "next/image";
 
 type Option = {
   label: string;
@@ -23,15 +24,27 @@ const ComboSelect: React.FC<ComboSelectProps> = ({
   value,
 }) => {
   const name = value ? jsonData[value]?.name : "";
+  const imgSrc = value ? jsonData[value]?.image : "";
   return (
     <Select.Root defaultValue="0" value={value} onValueChange={onChange}>
       <Select.Trigger
         className={clsx(
-          "w-3/5 rounded-none border-none shadow-none cursor-pointer flex justify-between items-center truncate",
+          "w-3/5 rounded-none border-none shadow-none cursor-pointer flex flex-row justify-between items-center truncate",
           styles.select
         )}
       >
-        <Select.Value aria-label={value}>{name}</Select.Value>
+        <Select.Value aria-label={value}>
+          <div className="flex justify-center items-center">
+            <Image
+              src={imgSrc}
+              width={20}
+              height={20}
+              className=" mr-2"
+              alt=""
+            />
+            {name}
+          </div>
+        </Select.Value>
         <Select.Icon className="SelectIcon">
           <ChevronDownIcon width={20} height={20} className="font-bold" />
         </Select.Icon>

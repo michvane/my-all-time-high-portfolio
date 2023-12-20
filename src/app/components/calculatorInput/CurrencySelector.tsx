@@ -49,7 +49,7 @@ const CryptoSelector: React.FC<Props> = ({
 
   return (
     <div className="flex w-full justify-center">
-      <div className="flex w-full sm:max-w-[300px]">
+      <div className="flex w-full sm:max-w-[340px]">
         <input
           type="number"
           placeholder="0.0"
