@@ -20,10 +20,12 @@ const CalculatorInput: React.FC = () => {
 
   useEffect(() => {
     const getData = async () => {
-      const response = await fetch("/api/getCurrencies");
+      const response = await fetch("/api/getCurrencies", {
+        next: { revalidate: 600 },
+      });
 
       if (response.ok) {
-        const data = await response.json();
+        const {data} = await response.json();
 
         setJsonData(data);
       }
