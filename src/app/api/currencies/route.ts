@@ -9,7 +9,7 @@ export async function GET() {
   // const data = await response.json();
 
   // if (data?.status?.error_code === 429) {
-    return Response.json(crypto);
+    return Response.json({ data: crypto });
   // }
 
   // return Response.json({ data });
