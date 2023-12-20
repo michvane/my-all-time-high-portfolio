@@ -6,11 +6,9 @@ import clsx from "clsx";
 
 export default function Home() {
   const [screen, setScreen] = useState<"landing" | "calculator">("landing");
-  // const ref = useRef<HTMLDivElement | null>(null);
 
   const onScroll = () => {
     setScreen("calculator");
-    // ref.current?.scrollIntoView({ behavior: "smooth" });
   };
   return (
     <main className="relative flex max-h-screen min-h-screen min-w-[100vw] max-w-[100vw] overflow-x-hidden flex-row">

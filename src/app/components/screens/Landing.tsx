@@ -12,7 +12,7 @@ const Landing: React.FC<{ className?: string; onScroll: () => void }> = ({
         <div
           className="p-4 rounded-2xl max-w-[600px]"
           style={{
-            background: "linear-gradient(90deg,#fdf1cb,#b01041)",
+            background: "linear-gradient(120deg,#e6d9ac,#e54666)",
             WebkitBackgroundClip: "text",
             backgroundClip: "text",
             WebkitTextFillColor: "transparent",
@@ -33,7 +33,7 @@ const Landing: React.FC<{ className?: string; onScroll: () => void }> = ({
             hold would reach their all time high!
           </Text>
         </div>
-        <Button onClick={onScroll} size="4" className="bg-[#bf3e5d]">
+        <Button onClick={onScroll} size="4">
           <Text weight="bold" size="6">
             Calculate now
           </Text>

@@ -9,7 +9,7 @@ const Calculator: React.FC<{ className: string }> = ({ className }) => {
         <div
           className="sm:p-4 rounded-2xl max-w-[600px]"
           style={{
-            background: "linear-gradient(90deg,#fdf1cb,#b01041)",
+            background: "linear-gradient(120deg,#e6d9ac,#e54666)",
             WebkitBackgroundClip: "text",
             backgroundClip: "text",
             WebkitTextFillColor: "transparent",
