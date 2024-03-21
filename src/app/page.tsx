@@ -1,6 +1,6 @@
 "use client";
 import Landing from "./components/screens/Landing";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import Calculator from "./components/screens/Calculator";
 import clsx from "clsx";
 
